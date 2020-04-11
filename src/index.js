@@ -1,1 +1,4 @@
-$("body").append("Hello world!");
+function main() {
+  $("body").append("Hello world!");
+}
+$(main);
