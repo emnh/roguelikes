@@ -136,8 +136,8 @@ function main() {
 const resultsMain = function(container) {
   const results = container.find(".results");
   results.empty();
-  results.append("<h1>Top 100</h1>");
-  fetch("https://emh.lart.no/stockpilerpg/status?top=100")
+  results.append("<h1>Top 20</h1>");
+  fetch("https://emh.lart.no/stockpilerpg/status?top=20")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -151,13 +151,13 @@ const resultsMain = function(container) {
         div.addClass("result");
         const img = loadImage(imgid, '4x');
         img.removeClass("main");
-        img[0].style.width = '64px';
-        img[0].style.height = '64px';
+        img[0].style.width = '32px';
+        img[0].style.height = '32px';
         results.append(div);
         div.append(img);
         const like1 = $("<img src='images/like-cropped.svg'></img>");
-        like1[0].style.width = '16px';
-        like1[0].style.height = '16px';
+        like1[0].style.width = '8px';
+        like1[0].style.height = '8px';
         div.append(like1);
         div.append(diffcount);
       }
