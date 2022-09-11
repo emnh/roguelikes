@@ -33,11 +33,69 @@ body {
 	padding: 0;
 }
 
-.arrow.left {
-  transform: rotate(180deg);
+<!--.ic {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  flex-wrap: wrap;-->
+<!--}-->
+
+.main {
+  height: 35vh;
+  width: 35vh;
 }
-.arrow.right {
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
 }
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.page {
+  display: table;
+}
+
+.ic.top {
+  display: table-row;
+  height: 50vh;
+  width: 90vh;
+}
+.ic.bottom {
+  display: table-row;
+  top: 50vh;
+  height: 50vh;
+  width: 90vh;
+}
+
+.like {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 6vh;
+  height: 6vh;
+}
+
+.arrow.up {
+  display: block;
+  transform: rotate(270deg);
+}
+.arrow.down {
+  display: block;
+  transform: rotate(90deg);
+}
+
+.arrow {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height: 20%;
+}
+
 .swiper {
 	width: 100%;
 	height: 100%;
@@ -72,5 +130,9 @@ body {
 </style>
 </head>
 <body>
+<div class="swiper mySwiper">
+	<div id="wrapper" class="swiper-wrapper">
+	</div>
+</div>
 </body>
 </html>
