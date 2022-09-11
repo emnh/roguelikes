@@ -34,12 +34,6 @@ body {
 	padding: 0;
 }
 
-<!--.ic {-->
-<!--  display: flex;-->
-<!--  flex-direction: column;-->
-<!--  flex-wrap: wrap;-->
-<!--}-->
-
 .main {
   display: table-row;
   margin-left: auto;
@@ -50,6 +44,12 @@ body {
   border: 1px solid black;
 }
 
+.results {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .result {
   border: 1px solid black;
   border-radius: 1.5em;
@@ -57,16 +57,8 @@ body {
   margin: 2px;
 }
 
-.visible {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 2s linear;
-}
-
 .hidden {
   visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
 }
 
 .page {

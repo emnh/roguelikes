@@ -62,6 +62,7 @@ function main() {
   const maxi = 5;
   for (let i = 0; i < maxi; i++) {
     const container = $("<div class='swiper-slide' ></div>");
+    container.append("<div class='results' class='hidden'/>");
     wrapper.append(container);
     lis(container);
 		containers.push(container);
@@ -73,25 +74,44 @@ function main() {
       });
 
       let first = true;
+      let counter = 0;
+      let prevWasResults = false;
 
    		on('slideChangeTransitionEnd', () => {
         if (first) {
           first = false;
           return;
         }
+        counter += 1;
+
         const container = $(swiper.slides[swiper.previousIndex]); // containers[(swiper.previousIndex + maxi - 1) % maxi];
+
         const imgs = container.find('img.main');
-        let indices = [imgs[0].dataset.index, imgs[1].dataset.index];
-        if (swiper.previousIndex < swiper.activeIndex) {
-          indices = [indices[1], indices[0]];
+        if (!prevWasResults && imgs.length > 0) {
+          let indices = [imgs[0].dataset.index, imgs[1].dataset.index];
+          if (swiper.previousIndex < swiper.activeIndex) {
+            indices = [indices[1], indices[0]];
+          }
+          const [upvote, downvote] = indices;
+          console.log(imgs[0]);
+          console.log(imgs[1]);
+          console.log("up", upvote, "down", downvote);
+          fetch("https://emh.lart.no/stockpilerpg/vote?imagelikeid=" + upvote + "&imagedownvoteid=" + downvote)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
         }
-        const [upvote, downvote] = indices;
-        console.log(imgs[0]);
-        console.log(imgs[1]);
-        console.log("up", upvote, "down", downvote);
-        fetch("https://emh.lart.no/stockpilerpg/vote?imagelikeid=" + upvote + "&imagedownvoteid=" + downvote)
-          .then((response) => response.json())
-          .then((data) => console.log(data));
+
+        if (counter % 10 == 0) {
+          resultsMain($(swiper.slides[swiper.activeIndex]));
+          $(".results").removeClass('hidden');
+          $(".page").addClass('hidden');
+          prevWasResults = true;
+        } else {
+          $(".results").addClass('hidden');
+          $(".page").removeClass('hidden');
+          prevWasResults = false;
+        }
+
         relis(container);
 				console.log('slideChangeTransitionEnd', swiper.previousIndex, '->', swiper.activeIndex);
       });
@@ -112,12 +132,14 @@ function main() {
   //setInterval(lis, 2000);
 }
 
-const resultsMain = function() {
-  $("body").empty();
-  $("body").append("<h1>Top Liked Pixel Art</h1>");
-  fetch("https://emh.lart.no/stockpilerpg/status")
+const resultsMain = function(container) {
+  const results = container.find(".results");
+  results.empty();
+  results.append("<h1>Top 100</h1>");
+  fetch("https://emh.lart.no/stockpilerpg/status?top=100")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       const ar = data.results;
       for (let i = 0; i < ar.length; i++) {
         const a = ar[i];
@@ -130,7 +152,7 @@ const resultsMain = function() {
         img.removeClass("main");
         img[0].style.width = '64px';
         img[0].style.height = '64px';
-        $("body").append(div);
+        results.append(div);
         div.append(img);
         const like1 = $("<img src='images/like-cropped.svg'></img>");
         like1[0].style.width = '16px';
@@ -141,10 +163,4 @@ const resultsMain = function() {
     });
 };
 
-const results = window.location.href.includes('#results');
-if (results) {
-  $(resultsMain);
-} else {
-  $(main);
-}
-
+$(main);
