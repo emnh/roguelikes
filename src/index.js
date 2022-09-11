@@ -99,6 +99,7 @@ function main() {
           fetch("https://emh.lart.no/stockpilerpg/vote?imagelikeid=" + upvote + "&imagedownvoteid=" + downvote)
             .then((response) => response.json())
             .then((data) => console.log(data));
+          imgs.remove();
         }
 
         if (counter % 10 == 0) {
