@@ -3,7 +3,8 @@
 Should be [live](https://emh.lart.no/publish/roguelikes/).
 
 Rogue Likes is a small game designed to rank roguelike pixel art, specifically
-Dungeon Crawl Stone Soup art in this case. It should work on recent mobiles.
+[Dungeon Crawl Stone Soup](https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental)
+art in this case. It should work on recent mobiles.
 
 The rules are simple:
 Swipe up to like the top image, swipe down to like the bottom image.
