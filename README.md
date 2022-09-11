@@ -1,5 +1,7 @@
 # Rogue Likes
 
+Should be [live](https://emh.lart.no/publish/roguelikes/).
+
 Rogue Likes is a small game designed to rank roguelike pixel art, specifically
 Dungeon Crawl Stone Soup art in this case. It should work on recent mobiles.
 
